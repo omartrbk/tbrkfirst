@@ -1,0 +1,173 @@
+<%- include('index.html') -%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bill form</title>
+      
+    
+
+             <!-- Button trigger modal -->
+<button type="button" class="btn btn-dark btn-sm ml float-right text-center mt-3 float-left" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    add new bills
+   </button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Billing Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="card" >
+                    <div class="card-body">
+                      <h5 class="card-title">Billing Form</h5>
+                    
+            <form action="/bill_process" method="post" id="billForm">
+              <div class="span alert-success" id="success"></div>
+              <div class="span alert-danger" id="error"></div>
+                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="op" id="op" value="I">
+                <label for="cus_name">Customer Name</label>
+                <select id="cust_name" id="cus_delete" class="form-control form-control-sm">
+                  <% data.forEach(function(d){ %>
+                    <option value="%= d.cust._id %>"><%= d.cust.name %></option>
+                    <% })%>
+                    </select>
+                <label for="perviosReading">Previos Reading</label>
+                <input type="number" name="perviosReading" id="perviosReading" class="form-control form-control-sm">
+                <label for="currentReading" >Current Reading</label>
+                <input type="number" name="currentReading" onchange="total()"  id="currentReading" class="form-control form-control-sm">
+                <label for="amountdue">Amountdue</label>
+                <input type="number" name="amountdue" id="amountdue" class="form-control form-control-sm">
+
+                <input type="hidden" name="rate" id="rate" class="form-control form-control-sm" >
+    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-dark btn-sm">Save changes</button>
+        </form>
+        </div>
+      </div>
+ 
+  
+             
+            </div>
+          </div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="container">
+  
+    <div class="card mt-3">
+
+      <div class="card-body">
+  <table class="table table-light mt-3 text-align-center" id="myTable">
+   <thead class="mt-3">
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Previos</th>
+    <th>Current</th>
+    <th>Amountdue</th>
+    <th>Rate</th>
+    <th>Pay</th>
+    <th>Action</th>
+   </thead>
+   <tbody>
+      <tr><% data.forEach(function(d){ %>
+        <tr>
+            <td><%= d.cust.name %></td>
+            <td><%= d.cust.phone %></td>
+            <td><%= d.perviosReading %></td> 
+            <td><%= d.currentReading%></td>
+            <td><%= d.amountdue %></td>
+            <td><%= d.rate%></td>
+           
+            <td><span href="/payment" class="btn btn-danger" ><i class='fa fa-credit-card'></i> </span> </td>
+         <td> 
+    <span class="btn btn-primary" > <i class="fas fa-edit"></i></span>
+      
+  <span  class="btn btn-danger" ><i class="fas fa-trash "></i></span>
+        
+        </td>
+        
+
+     
+      
+        <% })%>
+        </tr> 
+  
+      
+   </tbody>
+  </table>      
+
+<body>
+    
+</body>
+</html>
+
+<script>
+
+
+
+    
+</script>
+
+
+<script>
+    
+  $(document).ready(function() {
+    $('#myTable').DataTable()
+     
+
+
+  function show_mode() {
+                  $('#exampleModal').modal('show');
+              }
+  
+              function edit(_id, name, phone, district) {
+                  $('#name').val(name)
+                  $('#phone').val(phone)
+                  $('#district').val(district)
+                  $('#id').val(_id)
+                  $("#op").val('U')
+                  $('#exampleModal').modal('show');
+              }
+
+
+
+  })
+
+  
+  function total() {
+  var p = parseInt(document.getElementById("perviosReading").value);
+  var c = parseInt(document.getElementById("currentReading").value);
+
+ var rate = 0.6
+
+  var total = c-p 
+  var netTotal = total * rate
+
+
+  document.getElementById("amountdue").value = total;
+
+}
+fetch('/cus_delete/:id', {
+        method: 'DELETE'
+    })
+    .then(res => response.text())
+    .then(res => console.log(res))
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+</script>
