@@ -87,36 +87,6 @@
       
    </tbody>
   </table>
-//payment Modal
- <!-- Modal -->
- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Register New Customer</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <form action="/custProcess" method="post">
-        <input type="hidden" name="billid" id="billid">
-        <input type="hidden" name="op" id="op" value="I">
-        <label for="Name" class="form-label">Customer Name</label>
-        <input type="text" id="name" class="form-control  form-control-sm" name="name" placeholder="Enter customer district">
-        
-        <label for="Name" class="form-label">Cus</label>
-        <input type="text" id="district" class="form-control  form-control-sm" name="district" placeholder="Enter customer district">
-        <label for="Name" class="form-label">Customer Phone</label>
-        <input type="text" id="phone" class="form-control form-control-sm" name="phone" placeholder="Enter customer phone">
-      </div> 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
-      </div>
-    </form>
-    </div>
-  </div>
-</div>
 
 
 
@@ -165,10 +135,7 @@
             url: '/cus_delete/:id',
             type: 'Post',
             success: function (result) {
-                // var res = jQuery.parseJSON(result)
-                // if(result = 200){
-
-                // }
+                
             }
         });
     }

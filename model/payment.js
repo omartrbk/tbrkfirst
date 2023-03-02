@@ -16,3 +16,4 @@ var paymentSchema = mongoose.Schema({
 
 var payment = mongoose.model('payment', paymentSchema)
 module.exports = payment
+

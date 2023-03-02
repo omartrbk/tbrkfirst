@@ -29,12 +29,13 @@
                       <h5 class="card-title">Billing Form</h5>
                     
             <form action="/bill_process" method="post" id="billForm">
-              <div class="span alert-success" id="success"></div>
-              <div class="span alert-danger" id="error"></div>
+            
                 <input type="hidden" name="id" id="id">
                 <input type="hidden" name="op" id="op" value="I">
                 <label for="cus_name">Customer Name</label>
-                <select id="cust_name" id="cus_delete" class="form-control form-control-sm">
+                <select id="name" id="name" class="form-control form-control-sm">
+                   <option value="">Choose a Customer</option>
+                  
                   <% data.forEach(function(d){ %>
                     <option value="%= d.cust._id %>"><%= d.cust.name %></option>
                     <% })%>
@@ -66,6 +67,7 @@
 </div>
 
 
+
 <div class="container">
   
     <div class="card mt-3">
@@ -79,7 +81,6 @@
     <th>Current</th>
     <th>Amountdue</th>
     <th>Rate</th>
-    <th>Pay</th>
     <th>Action</th>
    </thead>
    <tbody>
@@ -92,11 +93,9 @@
             <td><%= d.amountdue %></td>
             <td><%= d.rate%></td>
            
-            <td><span href="/payment" class="btn btn-danger" ><i class='fa fa-credit-card'></i> </span> </td>
-         <td> 
-    <span class="btn btn-primary" > <i class="fas fa-edit"></i></span>
-      
-  <span  class="btn btn-danger" ><i class="fas fa-trash "></i></span>
+           
+    <td> <span class="btn btn-primary" onclick="edit(`<%= d._id%>`,`<%= d.cust.name%>`,`<%= d.phone%>`,`<%= d.perviosReading%>`,`<%= d.currentReading%>`,`<%= d.amountdue%>`,`<%= d.rate%>`)"> <i class="fas fa-edit"></i></span>
+  <span onclick="fetch(`<%=d._id%>`)" class="btn btn-danger" ><i class="fas fa-trash "></i></span>
         
         </td>
         
@@ -110,7 +109,6 @@
    </tbody>
   </table>      
 
-<body>
     
 </body>
 </html>
@@ -127,23 +125,6 @@
     
   $(document).ready(function() {
     $('#myTable').DataTable()
-     
-
-
-  function show_mode() {
-                  $('#exampleModal').modal('show');
-              }
-  
-              function edit(_id, name, phone, district) {
-                  $('#name').val(name)
-                  $('#phone').val(phone)
-                  $('#district').val(district)
-                  $('#id').val(_id)
-                  $("#op").val('U')
-                  $('#exampleModal').modal('show');
-              }
-
-
 
   })
 
@@ -161,7 +142,7 @@
   document.getElementById("amountdue").value = total;
 
 }
-fetch('/cus_delete/:id', {
+fetch('/bill/:id', {
         method: 'DELETE'
     })
     .then(res => response.text())
@@ -169,5 +150,23 @@ fetch('/cus_delete/:id', {
     .catch(error => {
         console.error('Error:', error);
     });
+
+    function show_mode() {
+                  $('#exampleModal').modal('show');
+              }
+        
+
+              
+  
+              function edit(_id, name, phone, previosReading,currentReading,amountdue,rate) {
+                  $('#name').val(name)
+                  $('#phone').val(name)
+                  $('#perviosReading').val(previosReading)
+                  $('#currentReading').val(currentReading)
+                  $('#amountdue').val(amountdue)
+                  $('#rate').val(rate)
+                  $("#id").val(_id)
+                  $('#exampleModal').modal('show');
+              }
 
 </script>

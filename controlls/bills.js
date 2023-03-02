@@ -61,18 +61,19 @@ var insertBills = async (req,res)=>{
 
         if(req.body.op === 'I'){
             new billModel(obj).save().then(success=>{
-              res.ridirect('bill')
+         res.json({message : "successfully inserted a new reocord"})
             }).catch(err=>{
                 console.log('err', err)
             })
         }else{
             let bill = await billModel.findOne({_id: req.body.id})
-            bill.name = req.body.name,
-            bill.phone = req.body.phone,
-            bill.district= req.body.district
+            bill.perviosReading =  req.body.perviosReading,
+            bill.currentReading = req.body.currentReading,
+            bill.rate= req.body.rate,
+            bill.amountdue= req.body.amountdue,
   
             bill.save().then(success=>{
-              res.ridirect('bill')
+      res.json({message : "successfully updatesd"})
             }).catch(err=>{
                 console.log('err', err)
             })
@@ -89,32 +90,14 @@ var insertBills = async (req,res)=>{
 
 
 
-//insert into Paymennt 
- var insertPayment = async (req,res) =>{
-  let data = {
-    bill: req.body.bill,
-  
-    amountdue: req.body.amountdue,
 
-    amountpaid: req.body.amountpaid,
 
-       
-  }
 
- await new  paymentModel(data).save().then(success =>{
-   res.json({messsage : "success"})
-   })
- }
 
- //update Payment 
-  var UpdatePayment = async(req,res) =>{
-            let id = {_id : req.body.id}
-            
-          }
+
 module.exports ={
     getBills,
     insertBills,
-    insertPayment,
-    UpdatePayment
+   
 }
 

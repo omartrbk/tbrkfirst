@@ -1,0 +1,106 @@
+<%- include('index.html') -%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+
+        <!--Payment Model-->          
+      <!-- Modal -->
+  <div class="modal fade" id="paymentModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Register New Customer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form action="/pay_proccess" method="post">
+          <input type="hidden" name="id" id="id">
+          <input type="hidden" name="op" id="op" value="I">
+          <label for="Name" class="form-label">Customer Name</label>
+          <input type="text" id="name" class="form-control  form-control-sm" name="name" placeholder="Enter customer district">
+          
+          <label for="Name" class="form-label">Customer district</label>
+          <input type="text" id="district" class="form-control  form-control-sm" name="district" placeholder="Enter customer district">
+          <label for="Name" class="form-label">Customer Phone</label>
+          <input type="text" id="phone" class="form-control form-control-sm" name="phone" placeholder="Enter customer phone">
+        </div> 
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+  
+        <div class="card mt-3">
+    
+          <div class="card-body">
+      <table class="table table-light mt-3 text-align-center" id="myTable">
+
+    <table class="table table-light" id="myTable">
+        <thead class="mt-3">
+            <tr>
+                <th>customer</th>
+                <th>Phone</th>
+                <th>amountDue</th>
+                <th>Paid</th>
+                <th>test</th>
+                <th>Pay</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>test</td>
+                <td>test</td>
+                <td>test</td>
+                <td>test</td>
+                <td>test</td>
+                <td>  <span class="btn btn-danger" onclick="paymentModel()" ><i class="fas fa-credit-card "></i></span></td>
+            </tr>
+        </tbody>
+
+
+
+    </table>
+</div>
+</div>
+
+    </div>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+<script>
+  $(document).ready(function() {
+    $('#myTable').DataTable()
+
+  })
+
+
+
+    function paymentModel() {
+                  $('#paymentModel').modal('show');
+              }
+</script>
